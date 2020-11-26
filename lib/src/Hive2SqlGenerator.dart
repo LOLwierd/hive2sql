@@ -115,21 +115,23 @@ class Hive2SqlGenerator extends GeneratorForAnnotation<HiveType> {
     var toMap =
         'Map<String, dynamic> toMap(${fileName} ${varName}){var map = <String, dynamic>{';
     for (var f in fields) {
-      var tempToMap;
-      var fieldName = f.declaration.toString().split(' ')[1];
+      if (_hiveFieldChecker.hasAnnotationOfExact(f)) {
+        var tempToMap;
+        var fieldName = f.declaration.toString().split(' ')[1];
 
-      switch (f.declaration.toString().split(' ')[0]) {
-        case 'String':
-          {
-            tempToMap = '$fieldName : $varName.$fieldName ?? "N/A",';
-          }
-          break;
-        default:
-          {
-            tempToMap = '$fieldName : $varName.$fieldName ?? 0,';
-          }
+        switch (f.declaration.toString().split(' ')[0]) {
+          case 'String':
+            {
+              tempToMap = '"$fieldName" : $varName.$fieldName ?? "N/A",';
+            }
+            break;
+          default:
+            {
+              tempToMap = '"$fieldName" : $varName.$fieldName ?? 0,';
+            }
+        }
+        toMap = toMap + tempToMap;
       }
-      toMap = toMap + tempToMap;
     }
     return toMap + '};' + 'return map;}';
   }
