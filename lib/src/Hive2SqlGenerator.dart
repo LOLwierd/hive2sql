@@ -106,6 +106,8 @@ class Hive2SqlGenerator extends GeneratorForAnnotation<Hive2SQLType> {
         fields = fields + field;
       }
     }
+    fields = fields.substring(0, fields.length - 2);
+    fields = fields + '\n';
     return fields + ");''';" + toMap;
   }
 
