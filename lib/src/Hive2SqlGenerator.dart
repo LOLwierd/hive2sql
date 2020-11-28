@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/src/builder/build_step.dart';
-import 'package:hive2sql/src/annotations.dart';
+import 'package:hive2sql_annotations/annotations.dart';
 import 'package:source_gen/source_gen.dart';
 
-final _hiveFieldChecker = const TypeChecker.fromRuntime(HiveField);
-final _nullableChecker = const TypeChecker.fromRuntime(NullableMoor);
+final _hiveFieldChecker = const TypeChecker.fromRuntime(Hive2SQLField);
+final _nullableChecker = const TypeChecker.fromRuntime(NullableSQL);
 final _primaryChecker = const TypeChecker.fromRuntime(PK);
 final getFileName = RegExp(r'.*\/(.*).dart');
 final getParameterType = RegExp(r'.*\((.*) .*');
 
-class Hive2SqlGenerator extends GeneratorForAnnotation<HiveType> {
+class Hive2SqlGenerator extends GeneratorForAnnotation<Hive2SQLType> {
   @override
   FutureOr<String> generateForAnnotatedElement(
       Element element, ConstantReader annotation, BuildStep buildStep) async {

@@ -4,7 +4,7 @@ builders:
     builder_factories: ["hive2sqlGenerator"]
     build_extensions: { ".dart": ["hive2sql.g.part"] }
     auto_apply: dependents
-    build_to: source
+    build_to: cache
     applies_builders: ["source_gen|combining_builder"]
   # hive2sqlBuilder:
   #   import: "package:hive2sql/hive2sql.dart"
